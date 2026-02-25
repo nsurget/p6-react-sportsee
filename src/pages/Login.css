@@ -22,11 +22,6 @@
     backdrop-filter: blur(37px);
 }
 
-.login-left img {
-    width: 40%;
-    height: auto;
-}
-
 .login-form-wrapper {
     width: 100%;
     max-width: 450px;

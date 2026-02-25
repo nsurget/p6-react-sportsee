@@ -38,5 +38,9 @@ export async function loginUser(username, password) {
 export async function fetchUserInfo() {
     // Pass auth token if backend requires it. For now, just call the endpoint.
     // The brief says: http://localhost:8000/api/user-info
-    return apiCall('/user-info');
+    return apiCall('/user-info', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
 }

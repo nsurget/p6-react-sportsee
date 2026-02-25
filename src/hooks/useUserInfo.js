@@ -30,7 +30,7 @@ export function useUserInfo() {
         }
 
         loadData();
-    });
+    }, []);
 
     return { data, loading, error };
 }

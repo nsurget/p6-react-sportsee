@@ -1,0 +1,18 @@
+.logo-container {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    height: auto;
+     
+}
+
+.logo-container .lottie {
+    width: 19px;
+    padding-right: 5px;
+    height: 24px;
+}
+
+.logo-container .logo {
+    width: 132px;
+    height: 24px;
+}

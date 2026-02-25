@@ -1,7 +1,8 @@
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
+import "./Nav.css";
 
-export default function Nav({ className }) {
+export default function Nav() {
     const { logout } = useAuth();
     const navigate = useNavigate();
 
@@ -11,10 +12,11 @@ export default function Nav({ className }) {
     };
 
     return (
-        <nav className={className}>
-
-            <button onClick={handleLogout} className="logout-btn">Déconnexion</button>
-
+        <nav className="nav-header">
+            <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Dashboard</NavLink>
+            <NavLink to="/profile" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Mon profil</NavLink>
+            <div className="sep"></div>
+            <button onClick={handleLogout} className="logout-btn">Se déconnecter</button>
         </nav>
     );
 }

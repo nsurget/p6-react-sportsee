@@ -20,7 +20,7 @@ export default function Login() {
             // data.email maps to the API's username field according to brief
             const response = await loginUser(data.username, data.password);
             login(response.userId, response.token);
-            navigate('/profile');
+            navigate('/dashboard');
         } catch (err) {
             setApiError(err.message || 'La connexion a échoué. Vérifiez vos identifiants.');
         } finally {
