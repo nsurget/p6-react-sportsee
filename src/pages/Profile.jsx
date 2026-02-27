@@ -15,7 +15,7 @@ export default function Profile() {
 
     return (
         <div className="profile-dashboard">
-            <Header className="profile-header">
+            <Header className="header">
                 <Logo />
                 <Nav />
             </Header>

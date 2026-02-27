@@ -44,3 +44,14 @@ export async function fetchUserInfo() {
         },
     });
 }
+
+/**
+ * Fetches the user activity between two dates from the API
+ */
+export async function fetchUserActivity(startWeek, endWeek) {
+    return apiCall(`/user-activity?startWeek=${startWeek}&endWeek=${endWeek}`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+}

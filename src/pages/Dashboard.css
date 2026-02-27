@@ -1,5 +1,90 @@
-.dashboard-main .welcome-section {
+.main .welcome-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, #FFFFFF 50%, var(--Tokens-Surface-Secondary, #F2F3FF) 100%);
+    border-radius: 20px;
+    padding: 30px 40px;
+    max-width: 1052px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+.welcome-user {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
+}
+
+.welcome-user .profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.welcome-user .user-info h1 {
+    font-size: 28px;
+    font-weight: 500;
+    color: #282D30;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.welcome-user .user-info .member-since {
+    font-size: 14px;
+    color: #74798C;
+    margin: 0;
+}
+
+.traveled-data {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.traveled-data .traveled-label {
+    font-size: 14px;
+    color: #74798C;
+    margin: 0;
+}
+
+.traveled-data .traveled-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #0A1CFF;
+    color: #FFFFFF;
+    padding: 20px 30px;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.traveled-data .traveled-badge img {
+    height: 35px;
+}
+
+
+.last-performances {
+    padding: 35px 0px 15px;
+    max-width: 1052px;
+    margin: 0 auto;
+}
+
+.last-performances h3 {
+    color: var(--Tokens-Typographie-Primary, #111);
+
+    /* Heading 4 */
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.performances-container {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
 }
