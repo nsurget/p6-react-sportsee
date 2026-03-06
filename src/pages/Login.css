@@ -9,17 +9,30 @@
     position: absolute;
     top: 0;
     left: 0;
+
+
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        height: auto;
+    }
 }
 
 .login-left {
-    flex: 1;
+    flex: 0.8;
     display: flex;
     flex-direction: column;
-    padding: 4rem;
+    padding: 6rem;
+    padding-right: 1rem;
     overflow: scroll;
     max-height: 100vh;
     background: var(--Tokens-Surface-Secondary, #F2F3FF);
     backdrop-filter: blur(37px);
+
+    @media (max-width: 1280px) {
+        flex: 1.4;
+        padding: 2rem;
+    }
 }
 
 .login-form-wrapper {

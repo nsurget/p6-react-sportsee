@@ -8,6 +8,8 @@ const formatDate = (date) => {
 export function useUserBpm(initialEndString = '2025-02-25', weekNumber = 1) {
     const [endDate, setEndDate] = useState(new Date(initialEndString));
     const [data, setData] = useState(null);
+    const [chartData, setChartData] = useState([]);
+    const [averageBpm, setAverageBpm] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -36,10 +38,54 @@ export function useUserBpm(initialEndString = '2025-02-25', weekNumber = 1) {
                 console.log(startWeekStr, endWeekStr);
 
                 const rawData = await fetchUserActivity(startWeekStr, endWeekStr);
-                
 
                 if (isMounted) {
                     setData(rawData);
+
+                    const days = [
+                        { name: 'Lun', min: null, max: null, moy: null, formattedDate: '' },
+                        { name: 'Mar', min: null, max: null, moy: null, formattedDate: '' },
+                        { name: 'Mer', min: null, max: null, moy: null, formattedDate: '' },
+                        { name: 'Jeu', min: null, max: null, moy: null, formattedDate: '' },
+                        { name: 'Ven', min: null, max: null, moy: null, formattedDate: '' },
+                        { name: 'Sam', min: null, max: null, moy: null, formattedDate: '' },
+                        { name: 'Dim', min: null, max: null, moy: null, formattedDate: '' }
+                    ];
+
+                    let totalBpm = 0;
+                    let countBpm = 0;
+
+                    const normalizedStart = new Date(startWeekStr);
+                    normalizedStart.setHours(0, 0, 0, 0);
+
+                    for (let i = 0; i < 7; i++) {
+                        const d = new Date(normalizedStart);
+                        d.setDate(d.getDate() + i);
+                        days[i].formattedDate = d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                    }
+
+                    if (Array.isArray(rawData)) {
+                        rawData.forEach(session => {
+                            const sessionDate = new Date(session.date);
+                            sessionDate.setHours(12, 0, 0, 0);
+
+                            const diffTime = sessionDate - normalizedStart;
+                            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                            if (diffDays >= 0 && diffDays < 7 && session.heartRate) {
+                                days[diffDays].min = session.heartRate.min || 0;
+                                days[diffDays].max = session.heartRate.max || 0;
+                                days[diffDays].moy = session.heartRate.average || 0;
+
+                                totalBpm += session.heartRate.average || 0;
+                                countBpm++;
+                            }
+                        });
+                    }
+
+                    // On ne garde dans le chartData que les jours qui ont une donnée pour éviter les points à zéro sur la courbe (ou on les laisse à zéro si c'est voulu)
+                    setChartData(days);
+                    setAverageBpm(countBpm > 0 ? Math.round(totalBpm / countBpm) : 0);
                 }
             } catch (err) {
                 if (isMounted) {
@@ -105,6 +151,8 @@ export function useUserBpm(initialEndString = '2025-02-25', weekNumber = 1) {
 
     return {
         data,
+        chartData,
+        averageBpm,
         loading,
         error,
         nextWeek,

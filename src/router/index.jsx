@@ -2,47 +2,39 @@ import { createBrowserRouter } from 'react-router-dom';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Dashboard from '../pages/Dashboard';
-import Error from '../pages/Error';
+import ErrorPage from '../pages/Error';
 import ProtectedRoute from '../components/ProtectedRoute';
+import Layout from '../components/Layout';
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: (
             <ProtectedRoute>
-                <Dashboard />
+                <Layout />
             </ProtectedRoute>
         ),
+        children: [
+            {
+                index: true,
+                element: <Dashboard />,
+            },
+            {
+                path: "dashboard",
+                element: <Dashboard />,
+            },
+            {
+                path: "profile",
+                element: <Profile />,
+            },
+            {
+                path: "*",
+                element: <ErrorPage />,
+            }
+        ],
     },
     {
         path: "/login",
-        element: (
-            <Login />
-        ),
+        element: <Login />,
     },
-    {
-        path: "/dashboard",
-        element: (
-            <ProtectedRoute>
-                <Dashboard />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/profile",
-        element: (
-            <ProtectedRoute>
-                <Profile />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "*",
-        element: (
-            <ProtectedRoute>    
-                <Error />
-            </ProtectedRoute>
-        ),
-    },
-    
 ]);

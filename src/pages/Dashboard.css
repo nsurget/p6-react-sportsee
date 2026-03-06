@@ -5,7 +5,6 @@
     background: linear-gradient(180deg, #FFFFFF 50%, var(--Tokens-Surface-Secondary, #F2F3FF) 100%);
     border-radius: 20px;
     padding: 30px 40px;
-    max-width: 1052px;
     margin: 0 auto;
     padding-bottom: 60px;
 }
@@ -68,7 +67,6 @@
 
 .last-performances {
     padding: 35px 0px 15px;
-    max-width: 1052px;
     margin: 0 auto;
 }
 
@@ -81,10 +79,19 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    margin-bottom: 20px;
 }
 
 .performances-container {
     display: flex;
     gap: 30px;
     justify-content: space-between;
+}
+
+.performances-container .months-distance {
+    width: 50%;
+}
+
+.performances-container .week-bpm {
+    width: 50%;
 }

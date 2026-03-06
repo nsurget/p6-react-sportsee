@@ -1,16 +1,17 @@
 import { useUserInfo } from '../hooks/useUserInfo';
 import { useUserBpm } from '../hooks/useUserBpm';
 import { useUserKilometers } from '../hooks/useUserKilometers';
-import Logo from '../components/Logo';
-import Header from '../components/Header';
-import Nav from '../components/Nav';
 import Main from '../components/Main';
+import MonthsDistanceBlock from '../components/MonthsDistanceBlock';
+import WeekBpmBlock from '../components/WeekBpmBlock';
 import './Dashboard.css';
 
 export default function Dashboard() {
     const { data: userInfo, loading: infoLoading, error: infoError } = useUserInfo();
     const {
         data: activityData,
+        chartData: bpmChartData,
+        averageBpm,
         loading: activityLoading,
         error: activityError,
         nextWeek,
@@ -21,11 +22,13 @@ export default function Dashboard() {
 
     const {
         data: kilometersData,
+        chartData,
+        averageKm,
+        dateRangeLabel,
         loading: kilometersLoading,
         error: kilometersError,
-        nextMonth,
-        prevMonth,
-        currentMonthLabel,
+        nextPeriod,
+        prevPeriod,
         endDate: endDateKilometers
     } = useUserKilometers(new Date().toISOString().split('T')[0]);
 
@@ -44,11 +47,6 @@ export default function Dashboard() {
 
     return (
         <div className="dashboard-container">
-            <Header className="header">
-                <Logo />
-                <Nav />
-            </Header>
-
             <Main className="main">
                 <section className="welcome-section">
                     <div className="welcome-user">
@@ -70,18 +68,22 @@ export default function Dashboard() {
                 <section className="last-performances">
                     <h3>Vos dernières performances</h3>
                     <div className="performances-container">
-                        <div className="months-distance">
-                            <button onClick={prevMonth}>Mois précédent</button>
-                            <p>{currentMonthLabel}</p>
-                            <button onClick={nextMonth} disabled={endDateKilometers.toISOString().split('T')[0] === new Date().toISOString().split('T')[0]}>Mois suivant</button>
-                            <pre>{JSON.stringify(kilometersData, null, 2)}</pre>
-                        </div>
-                        <div className="week-bpm">
-                            <button onClick={prevWeek}>Semaine précédente</button>
-                            <p>{currentWeekRangeLabel}</p>
-                            <button onClick={nextWeek} disabled={endDateActivity.toISOString().split('T')[0] === new Date().toISOString().split('T')[0]}>Semaine suivante</button>
-                            <pre>{JSON.stringify(activityData, null, 2)}</pre>
-                        </div>
+                        <MonthsDistanceBlock
+                            averageKm={averageKm}
+                            prevPeriod={prevPeriod}
+                            dateRangeLabel={dateRangeLabel}
+                            nextPeriod={nextPeriod}
+                            endDateKilometers={endDateKilometers}
+                            chartData={chartData}
+                        />
+                        <WeekBpmBlock
+                            averageBpm={averageBpm}
+                            prevWeek={prevWeek}
+                            currentWeekRangeLabel={currentWeekRangeLabel}
+                            nextWeek={nextWeek}
+                            endDateActivity={endDateActivity}
+                            chartData={bpmChartData}
+                        />
                     </div>
                 </section>
 

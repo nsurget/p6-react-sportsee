@@ -1,0 +1,24 @@
+.week-bpm {
+    padding: 20px;
+    background-color: #FBFBFB;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.average-bpm-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heart-rate-label {
+    margin: 10px 0 10px 0;
+    color: var(--Tokens-Typographie-Secondary, #707070);
+
+    /* Body small */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
