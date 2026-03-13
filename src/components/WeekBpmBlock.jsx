@@ -1,5 +1,7 @@
 import React from 'react';
 import WeekBpmChart from './WeekBpmChart';
+import Loader from './Loader';
+import ErrorMessage from './ErrorMessage';
 import './WeekBpmBlock.css';
 
 const WeekBpmBlock = ({
@@ -8,12 +10,16 @@ const WeekBpmBlock = ({
     currentWeekRangeLabel,
     nextWeek,
     endDateActivity,
-    chartData
+    chartData,
+    loading,
+    error
 }) => {
     const isToday = endDateActivity.toISOString().split('T')[0] === new Date().toISOString().split('T')[0];
 
     return (
         <div className="week-bpm">
+            {loading && <Loader />}
+            {error && <ErrorMessage message={error} />}
             <div className="average-bpm-navigation">
                 <div className="average-label red">
                     {averageBpm} BPM en moyenne

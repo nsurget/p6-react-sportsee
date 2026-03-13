@@ -25,6 +25,12 @@ export function useUserKilometers(initialEndString = new Date().toISOString().sp
                 setError(null);
 
                 const currentEnd = new Date(endDate);
+
+                // Make sure currentEnd is the Sunday of the current week (to align weeks from Monday to Sunday)
+                const dayOfWeek = currentEnd.getDay();
+                const daysToSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
+                currentEnd.setDate(currentEnd.getDate() + daysToSunday);
+
                 const startDay = new Date(currentEnd);
                 startDay.setDate(startDay.getDate() - 27); // 28 jours au total: de J-27 à J-0
 

@@ -2,15 +2,17 @@ import React from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import './Logo.css';
 
-export default function Logo({ className }) {
+export default function Logo({ className, onlyLottie }) {
     return (
-        <div className="logo-container">
+        <div className={`logo-container ${className || ''}`}>
             <DotLottieReact
                 src="/images/logo-sportsee.lottie"
                 loop
                 autoplay
                 className={"lottie"} />
-            <img src="/images/logo-no-picto.svg" alt="SportSee Logo" className={"logo"} />
+            {!onlyLottie ? (
+                <img src="/images/logo-no-picto.svg" alt="SportSee Logo" className={"logo"} />
+            ) : null}
         </div>
 
 

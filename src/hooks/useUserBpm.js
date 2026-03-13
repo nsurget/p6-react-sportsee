@@ -35,7 +35,6 @@ export function useUserBpm(initialEndString = '2025-02-25', weekNumber = 1) {
                 const todayForClamp = new Date();
                 const safeEndDate = endDate > todayForClamp ? todayForClamp : endDate;
                 const endWeekStr = formatDate(safeEndDate);
-                console.log(startWeekStr, endWeekStr);
 
                 const rawData = await fetchUserActivity(startWeekStr, endWeekStr);
 
@@ -58,10 +57,17 @@ export function useUserBpm(initialEndString = '2025-02-25', weekNumber = 1) {
                     const normalizedStart = new Date(startWeekStr);
                     normalizedStart.setHours(0, 0, 0, 0);
 
+                    const todayStart = new Date();
+                    todayStart.setHours(0, 0, 0, 0);
+
                     for (let i = 0; i < 7; i++) {
                         const d = new Date(normalizedStart);
                         d.setDate(d.getDate() + i);
                         days[i].formattedDate = d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+                        if (d > todayStart) {
+                            days[i].moy = null;
+                        }
                     }
 
                     if (Array.isArray(rawData)) {
@@ -135,18 +141,34 @@ export function useUserBpm(initialEndString = '2025-02-25', weekNumber = 1) {
     // Derived states for presentation
     const currentWeekRangeLabel = (() => {
         const start = new Date(endDate);
-        // On recule en fonction du jour de la semaine pour avoir le lundi
         const dayOfWeek = start.getDay();
         const daysToSubtract = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
         start.setDate(start.getDate() - daysToSubtract);
 
         const endOfWeek = new Date(start);
-        endOfWeek.setDate(start.getDate() + 6); // Dimanche de cette semaine
+        endOfWeek.setDate(start.getDate() + 6);
         if (endOfWeek > new Date()) {
             endOfWeek.setDate(new Date().getDate());
         }
 
         return `${start.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })} - ${endOfWeek.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}`;
+    })();
+
+    const currentWeekNumericRangeLabel = (() => {
+        const start = new Date(endDate);
+        const dayOfWeek = start.getDay();
+        const daysToSubtract = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+        start.setDate(start.getDate() - daysToSubtract);
+
+        const endOfWeek = new Date(start);
+        endOfWeek.setDate(start.getDate() + 6);
+        if (endOfWeek > new Date()) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            endOfWeek.setTime(today.getTime());
+        }
+
+        return `${start.toLocaleDateString('fr-FR', { day: 'numeric', month: '2-digit', year: 'numeric' })} au ${endOfWeek.toLocaleDateString('fr-FR', { day: 'numeric', month: '2-digit', year: 'numeric' })}`;
     })();
 
     return {
@@ -158,6 +180,7 @@ export function useUserBpm(initialEndString = '2025-02-25', weekNumber = 1) {
         nextWeek,
         prevWeek,
         endDate,
-        currentWeekRangeLabel
+        currentWeekRangeLabel,
+        currentWeekNumericRangeLabel
     };
 }

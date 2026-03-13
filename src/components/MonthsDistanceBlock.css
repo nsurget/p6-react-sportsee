@@ -3,6 +3,8 @@
     background-color: #FBFBFB;
     border-radius: 5px;
     height: fit-content;
+    position: relative;
+    overflow: hidden;
 }
 
 .average-distance-navigation {
@@ -96,5 +98,14 @@
 
     &.prev svg {
         transform: rotate(180deg) translate(1px, 0);
+    }
+
+    &:not(:disabled):hover {
+        background-color: var(--Tokens-Surface-Action-Hover, #5465F7);
+        border-color: var(--Tokens-Border-Primary, #0B23F4);
+        
+        svg {
+            filter: brightness(0) invert(1);
+        }
     }
 }

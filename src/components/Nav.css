@@ -9,13 +9,13 @@ nav.nav-header {
 
 .nav-link {
     text-decoration: none;
-    color: var(--Tokens-Typographie-Primary, #111111);
+    color: var(--Tokens-Surface-Bleu, #0B23F4);
     font-size: 16px;
     font-weight: 400;
 }
 
 .nav-link.active {
-    font-weight: 700;
+    color: var(--Tokens-Typographie-Primary, #111111);
 }
 
 .sep {

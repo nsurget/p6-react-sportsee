@@ -14,7 +14,7 @@ import {
 const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
         const data = payload[0].payload;
-        if (data.min === null && data.max === null && data.moy === null) {
+        if (data.min === null && data.max === null && (data.moy === null || data.moy === 0)) {
             return null; // Don't show tooltip if no data
         }
         return (
@@ -51,6 +51,30 @@ const renderLegend = (props) => {
 const WeekBpmChart = ({ data }) => {
     const [isHovered, setIsHovered] = React.useState(false);
 
+    // Compute custom domain to ignore 0 and null values
+    const getCustomDomain = () => {
+        if (!data || data.length === 0) return [0, 'auto'];
+        
+        // Extract all valid BPM values from min, max, moy
+        let allValues = [];
+        data.forEach(d => {
+            if (d.min !== null && d.min > 0) allValues.push(d.min);
+            if (d.max !== null && d.max > 0) allValues.push(d.max);
+            if (d.moy !== null && d.moy > 0) allValues.push(d.moy);
+        });
+
+        if (allValues.length === 0) return [0, 200]; // Default if no data
+
+        const actualMin = Math.min(...allValues);
+        
+        // The Y bottom should be 10 below the absolute min value
+        const yMin = Math.max(0, actualMin - 10);
+        
+        return [yMin, 'auto'];
+    };
+
+    const yDomain = getCustomDomain();
+
     return (
         <ResponsiveContainer width="100%" height={450}>
             <ComposedChart
@@ -66,7 +90,7 @@ const WeekBpmChart = ({ data }) => {
             >
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#EBEBEB" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9B9EAC', fontSize: 14 }} dy={15} />
-                <YAxis domain={['dataMin - 20', 'auto']} axisLine={false} tickLine={false} tick={{ fill: '#9B9EAC', fontSize: 14 }} dx={-10} />
+                <YAxis domain={yDomain} axisLine={false} tickLine={false} tick={{ fill: '#9B9EAC', fontSize: 14 }} dx={-10} />
                 <Tooltip content={<CustomTooltip />} cursor={{ fill: 'none' }} />
                 <Legend content={renderLegend} verticalAlign="bottom" align="left" wrapperStyle={{ paddingBottom: '20px', paddingTop: '20px' }} />
                 <Bar dataKey="min" barSize={20} fill="#FCC1B6" radius={[30, 30, 30, 30]} />

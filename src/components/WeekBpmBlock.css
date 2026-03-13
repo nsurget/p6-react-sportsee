@@ -3,6 +3,8 @@
     background-color: #FBFBFB;
     border-radius: 5px;
     height: fit-content;
+    position: relative;
+    overflow: hidden;
 }
 
 .average-bpm-navigation {

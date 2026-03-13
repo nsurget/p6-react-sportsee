@@ -95,3 +95,18 @@ p,
         margin-right: 20px;
     }
 }
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout-container .container {
+    flex: 1;
+    width: 100%;
+
+    @media (max-width: 1180px) {
+        width: calc(100% - 40px);
+    }
+}

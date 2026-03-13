@@ -1,0 +1,193 @@
+.this-week {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+}
+
+.this-week-header {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.this-week-header h3 {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--tokens-typographie-primary, #111);
+}
+
+.this-week-header p {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--tokens-typographie-secondary, #707070);
+}
+
+.this-week-content {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+}
+
+.week-goals-card {
+    background: white;
+    box-shadow: 0px 4px 84px -40px rgba(157, 167, 251, 0.4);
+    border-radius: 10px;
+    width: 450px;
+    height: 342px;
+    padding: 26px 38px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.week-goals-info {
+    width: 100%;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-value {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.value-number {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--tokens-typographie-bleu, #0b23f4);
+}
+
+.value-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--tokens-surface-light-bleu, #b6bdfc);
+}
+
+.week-goals-info .subtitle {
+    margin: 5px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--tokens-typographie-secondary, #707070);
+}
+
+.pie-chart-container {
+    width: 306px;
+    height: 190px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie-legends {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.legend-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.legend-item:nth-child(1) {
+    top: 20px;
+    right: 20px;
+}
+
+.legend-item:nth-child(2) {
+    bottom: 20px;
+    left: 20px;
+}
+
+.legend-color {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+}
+
+.legend-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    color: var(--tokens-typographie-secondary, #707070);
+}
+
+.week-stats-cards {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    height: 105px;
+    box-sizing: border-box;
+}
+
+.stat-label {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--tokens-typographie-secondary, #707070);
+}
+
+.stat-value {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.duration-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--tokens-typographie-bleu, #0b23f4);
+}
+
+.duration-unit {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--tokens-surface-light-bleu, #b6bdfc);
+}
+
+.distance-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--tokens-typographie-orange, #f4320b);
+}
+
+.distance-unit {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--tokens-surface-light-orange, #fcc1b6);
+}

@@ -18,7 +18,7 @@ export default function LoginForm({ onSubmit, isLoading, apiError }) {
                         id="username"
                         type="text"
                         {...register('username', { required: 'Veuillez renseigner votre identifiant' })}
-                        defaultValue="sophiemartin"
+                        
                     />
                     {errors.username && <span className="error">{errors.username.message}</span>}
                 </div>
@@ -29,7 +29,7 @@ export default function LoginForm({ onSubmit, isLoading, apiError }) {
                         id="password"
                         type="password"
                         {...register('password', { required: 'Le mot de passe est requis' })}
-                        defaultValue="password123"
+                        
                     />
                     {errors.password && <span className="error">{errors.password.message}</span>}
                 </div>
@@ -41,7 +41,7 @@ export default function LoginForm({ onSubmit, isLoading, apiError }) {
                     <button
                         type="button"
                         className="btn-secondary"
-                        onClick={() => console.log('Mot de passe oublié cliqué')}
+                        onClick={() => {alert('Mot de passe oublié cliqué')}}
                     >
                         Mot de passe oublié ?
                     </button>
